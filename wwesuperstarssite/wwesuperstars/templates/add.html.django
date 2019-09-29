@@ -1,0 +1,21 @@
+{% extends 'wwesuperstarssite/templates/base.html.django' %}
+
+{% block navigation %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Superstars</a></li>
+    <li><a href="{% url 'add' %}" class="current">Add Superstar</a></li>
+    <li><a href="{% url 'movie-home' %}">Movies</a></li>
+    <li><a href="{% url 'add-movie' %}">Add Movie</a></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h2>Add Superstar</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add Superstar</button>
+</form>
+{% endblock %}

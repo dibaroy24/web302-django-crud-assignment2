@@ -1,0 +1,23 @@
+{% extends 'wwesuperstarssite/templates/base.html.django' %}
+
+{% block navigation %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Superstars</a></li>
+    <li><a href="{% url 'add' %}">Add Superstar</a></li>
+    <li><a href="{% url 'movie-home' %}">Movies</a></li>
+    <li><a href="{% url 'add-movie' %}" class="current">Add Movie</a></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="warning">
+  Are you sure you want to delete {{ movie.title }}?
+</div>
+<form method="post">
+  {% csrf_token %}
+  <a href="{% url 'movie-home' %}" class="button">Cancel</a>
+  <button type="submit">Yes, delete {{ movie.title }}</button>
+</form>
+{% endblock %}

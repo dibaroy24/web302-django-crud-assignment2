@@ -1,0 +1,35 @@
+{% extends 'wwesuperstarssite/templates/base.html.django' %}
+
+{% block navigation %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Superstars</a></li>
+    <li><a href="{% url 'add' %}">Add Superstar</a></li>
+    <li><a href="{% url 'movie-home' %}">Movies</a></li>
+    <li><a href="{% url 'add-movie' %}">Add Movie</a></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="grid">
+  <div class="grid-item">
+    <h2>Name of the movie: {{ movie.title }}</h2>
+    <h3>WWE Superstar: {{ movie.wwesuperstars }}</h3>
+    <h3>Charecter played in the movie: {{ movie.poster.role }}</a></h3>
+    {# {% for wwesuperstar in movie.wwesuperstars.all %} #}
+    {# <h3>WWE Superstar: {{ movie.wwesuperstars }}</h3> #}
+    {# {% endfor %} #}
+    {% if movie.poster.image %}
+    <img src="{{ MEDIA_URL }}{{ movie.poster.image }}" alt="{{ movie.title }}">
+    {% else %}
+    <a href="{% url 'add-poster' movie.pk %}" class="button">Add Movie Poster</a>
+    {% endif %}
+  </div>
+  <div class="grid-item">
+    <h3>Movie Options</h3>
+    <a href="{% url 'edit-movie' movie.pk %}" class="button">Edit</a>
+    <a href="{% url 'delete-movie' movie.pk %}" class="button">Delete</a>
+  </div>
+</div>
+{% endblock %}

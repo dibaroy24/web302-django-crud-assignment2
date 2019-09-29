@@ -1,0 +1,27 @@
+{% extends 'wwesuperstarssite/templates/base.html.django' %}
+
+{% block navigation %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}" class="current">Superstars</a></li>
+    <li><a href="{% url 'add' %}">Add Superstar</a></li>
+    <li><a href="{% url 'movie-home' %}">Movies</a></li>
+    <li><a href="{% url 'add-movie' %}">Add Movie</a></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="grid">
+  {% for wwesuperstar in wwesuperstars %}
+  <div class="grid-item">
+    <h2>{{ wwesuperstar.name }}</h2>
+    {% load staticfiles %}
+    <img src="{% static 'img/' %}{{ wwesuperstar.image }}" alt="{{ wwesuperstar.name }}">
+    <a href="{% url 'detail' wwesuperstar.pk %}" class="button">Details</a>
+    <a href="{% url 'edit' wwesuperstar.pk %}" class="button">Edit</a>
+    <a href="{% url 'delete' wwesuperstar.pk %}" class="button">Delete</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

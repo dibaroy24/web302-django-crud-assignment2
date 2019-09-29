@@ -1,0 +1,35 @@
+{% extends 'wwesuperstarssite/templates/base.html.django' %}
+
+{% block navigation %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Superstars</a></li>
+    <li><a href="{% url 'add' %}">Add Superstar</a></li>
+    <li><a href="{% url 'movie-home' %}">Movies</a></li>
+    <li><a href="{% url 'add-movie' %}">Add Movie</a></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="grid">
+  <div class="grid-item">
+    <h2>{{ wwesuperstar.name }}</h2>
+    <img src="{{ MEDIA_URL }}{{ wwesuperstar.image }}" alt="{{ wwesuperstar.name }}">
+  </div>
+  <div class="grid-item">
+    <h3>{{ wwesuperstar.name }} Details</h3>
+    {% if wwesuperstar.retired == True %}<p>(retired)</p>{% endif %}
+    <p>Age: {{ wwesuperstar.age }}</p>
+    <p>Movies worked on:</p>
+    {% for movie in wwesuperstar.movie.all %}
+      <p> {{ movie.title }} </p>
+    {% endfor %}
+  </div>
+  <div class="grid-item">
+    <h3>{{ wwesuperstar.name }} Options</h3>
+    <a href="{% url 'edit' wwesuperstar.pk %}" class="button">Edit</a>
+    <a href="{% url 'delete' wwesuperstar.pk %}" class="button">Delete</a>
+  </div>
+</div>
+{% endblock %}
